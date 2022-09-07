@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class Input extends Component {
-
-  render() {
-    const { type, name, pattern, title, isRequired, onChange } = this.props;
+const Input = ({ type, name, pattern, title, isRequired, onChange }) => {
     return (
         <input
           onChange={onChange}
@@ -16,7 +13,6 @@ class Input extends Component {
           required={isRequired}
         />
     );
-  }
 }
 
 Input.propTypes = {

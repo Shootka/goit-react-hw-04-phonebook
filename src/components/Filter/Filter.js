@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Input from '../Input/Input';
 
-class Filter extends Component {
-  render() {
-    const { onChange} = this.props
-    return (
-      <div>
-        <span style={{fontSize: 20}}>Find contact by name </span>
-        <Input onChange={onChange}/>
-      </div>
-    );
-  }
-}
+const Filter = ({onChange}) => {
+  const wrote = (event) => {
+    onChange(event.target.value);
+  };
+  return (
+    <div>
+      <span style={{ fontSize: 20 }}>Find contact by name </span>
+      <Input onChange={wrote} />
+    </div>
+  );
+};
 
 Filter.propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default Filter;

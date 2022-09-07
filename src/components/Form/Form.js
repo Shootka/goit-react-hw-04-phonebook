@@ -1,51 +1,45 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { divStyle } from '../style';
 import Input from '../Input/Input';
 import { nameTitle, numberTitle } from '../static/titles';
 import { contactNameRegex, contactNumberRegex } from '../static/regex';
 
-class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+const Form = ({ submitData }) => {
+  const [formData, setFormData] = useState({ name: '', number: '' });
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.submitData(this.state)
+    submitData(formData);
   };
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} style={divStyle}>
-        <label style={{ fontSize: 25, marginRight: 14 }}>Name:</label>
-        <Input name={'name'}
-               type={'text'}
-               title={nameTitle}
-               pattern={contactNameRegex}
-               isRequired={true}
-               onChange={this.handleChange} />
-        <label style={{ fontSize: 25, marginRight: 14 }}>Number:</label>
-        <Input name={'number'}
-               type={'tel'}
-               title={numberTitle}
-               pattern={contactNumberRegex}
-               onChange={this.handleChange}
-               isRequired={true} />
-        <button >Add contact</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={handleSubmit} style={divStyle}>
+      <label style={{ fontSize: 25, marginRight: 14 }}>Name:</label>
+      <Input name={'name'}
+             type={'text'}
+             title={nameTitle}
+             pattern={contactNameRegex}
+             isRequired={true}
+             onChange={handleChange} />
+      <label style={{ fontSize: 25, marginRight: 14 }}>Number:</label>
+      <Input name={'number'}
+             type={'tel'}
+             title={numberTitle}
+             pattern={contactNumberRegex}
+             onChange={handleChange}
+             isRequired={true} />
+      <button>Add contact</button>
+    </form>
+  );
+
+};
 
 Form.propTypes = {
-  submitData: PropTypes.func
+  submitData: PropTypes.func,
 };
 
 export default Form;
