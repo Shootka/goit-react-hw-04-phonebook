@@ -6,7 +6,6 @@ const ContactList = ({ contacts, title, filter, deleteItem }) => {
   const filteredContacts = contacts.filter(el => {
     return el?.name?.toLowerCase().includes(filter?.toLowerCase() || '');
   });
-
   return (
     <ul>
       {title}
@@ -21,7 +20,6 @@ const ContactList = ({ contacts, title, filter, deleteItem }) => {
       })}
     </ul>
   );
-
 };
 
 ContactList.propTypes = {
